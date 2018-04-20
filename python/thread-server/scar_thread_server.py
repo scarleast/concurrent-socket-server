@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #coding:utf-8
 
 import threading
@@ -9,7 +9,7 @@ ver='0.1'
 
 
 '''
-file name: scar-thread-server.py
+file name: scar_thread_socket_server.py
 function:
 '''
 
