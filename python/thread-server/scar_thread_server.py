@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3.5
 #coding:utf-8
 
 import threading
@@ -34,17 +34,18 @@ class thread_socket(object):
             clientfd.settimeout(10)
             threading.Thread(target=self.handle_client_request, args=(clientfd, address)).start()
             
-
     def handle_client_request(self, clientfd, address):
         while True:
             try:
                 data = clientfd.recv(1024)
                 if data:
-                    print("got a message:"+data)
-                    clientfd.sendall('server verion:'+ver+'\n')
-                    clientfd.sendall('data:'+data+'\n')
-            except: 
+                    print("got a message:"+data.decode("utf8"))
+                    clientfd.sendall(('server verion:'+ver+'\n').encode("utf8"))
+                    clientfd.sendall(('data:'+data.decode("utf8")+'\n').encode("utf8"))
+            except socket.error as e: 
+                print(e)
                 clientfd.close()
+                break
 
 def main():
     server = thread_socket('', 9000)
