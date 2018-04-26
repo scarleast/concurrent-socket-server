@@ -1,4 +1,4 @@
-使用环境：python2.7
+使用环境：python2.7/python3.5
 
 结束程序：不能直接通过ctrl+c结束，需要另开一个终端，ps -ef |grep scar找到进程，kill杀死即可。
 
