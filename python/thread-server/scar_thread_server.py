@@ -42,6 +42,8 @@ class thread_socket(object):
                     print("got a message:"+data.decode("utf8"))
                     clientfd.sendall(('server verion:'+ver+'\n').encode("utf8"))
                     clientfd.sendall(('data:'+data.decode("utf8")+'\n').encode("utf8"))
+                    #proactive exit thread prevents excessive cpu occupancy.
+                    raise SystemExit(1)
             except socket.error as e: 
                 print(e)
                 clientfd.close()
