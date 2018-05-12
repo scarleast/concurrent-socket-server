@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3.6
 #coding:utf-8
 
 import threading
@@ -42,15 +42,18 @@ class thread_socket(object):
                     print("got a message:"+data.decode("utf8"))
                     clientfd.sendall(('server verion:'+ver+'\n').encode("utf8"))
                     clientfd.sendall(('data:'+data.decode("utf8")+'\n').encode("utf8"))
+                else:
+                    print("client closed!")
+                    clientfd.close()
+                    break
                     #proactive exit thread prevents excessive cpu occupancy.
-                    raise SystemExit(1)
-            except socket.error as e: 
+            except e: 
                 print(e)
                 clientfd.close()
                 break
 
 def main():
-    server = thread_socket('', 9000)
+    server = thread_socket('', 10031)
     server.listen()
 
 if __name__ == "__main__":
